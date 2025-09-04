@@ -27,7 +27,7 @@ food = pygame.Rect(
 
 score = 0
 
-# >>> ADD THIS: game state flag
+# game state flag
 game_over = False
 
 def reset_game():
@@ -62,15 +62,15 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    # >>> ADD THIS BLOCK: handle Game Over state (put this near the top of the loop)
+    # handle Game Over state 
     if game_over:
         if keys[pygame.K_r]:
             reset_game()
         if keys[pygame.K_ESCAPE]:
             running = False
         draw_game_over()
-        clock.tick(FPS)  # keep loop steady on game over screen
-        continue  # skip the rest of the gameplay update/draw
+        clock.tick(FPS)  
+        continue  
 
     # --- controls (no instant reverse) ---
     if keys[pygame.K_UP] and snake_dir != (0, TILE):
@@ -87,7 +87,7 @@ while running:
         head = (snake[0][0] + snake_dir[0], snake[0][1] + snake_dir[1])
         snake.insert(0, head)
 
-        # eat food?
+        # eat food
         if pygame.Rect(head, (TILE, TILE)).colliderect(food):
             score += 1
             # respawn food
@@ -105,7 +105,7 @@ while running:
             # >>> CHANGE THIS: instead of reset_game(), trigger Game Over
             game_over = True
 
-    # --- draw ---
+    # draw screen
     screen.fill((0, 0, 0))
 
     # snake
